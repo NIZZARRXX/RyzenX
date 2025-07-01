@@ -1,264 +1,232 @@
-<!DOCTYPE html><html lang="id">
-<head>
+<!DOCTYPE html><html lang="id"><head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RYZENX CRR</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+  <title>ASSORTED CRASHER V3</title>
   <style>
-    * {
-      font-family: 'Roboto', sans-serif;
-      font-weight: 700;
-      box-sizing: border-box;
-    }
     body {
       margin: 0;
-      background-image: url('https://files.catbox.moe/hppe4k.jpg');
+      font-family: sans-serif;
+      background: url('https://img1.pixhost.to/images/6890/617231330_kyami.jpg') no-repeat center center fixed;
       background-size: cover;
-      background-position: center;
       color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
+      text-align: center;
+    }
+    .card {
+      background: rgba(0,0,0,0.8);
+      margin: 20px auto;
       padding: 20px;
-    }
-    .intro-text {
-      animation: fadeSlide 3s ease-in-out;
-      margin-bottom: 10px;
-      text-align: center;
-      font-size: 18px;
-      background-color: black;
-      box-shadow: 0 0 10px #00f;
-      padding: 10px 20px;
-      border-radius: 10px;
-    }
-    @keyframes fadeSlide {
-      0% { opacity: 0; transform: translateY(-20px); }
-      10% { opacity: 1; transform: translateY(0); }
-      90% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(-20px); }
-    }
-    input[type="text"] {
-      padding: 10px;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
-      width: 250px;
-      text-align: center;
-      background-color: black;
-      color: white;
-      box-shadow: 0 0 10px #00f;
-    }
-    button {
-      padding: 12px 24px;
-      font-size: 16px;
-      background-color: black;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      box-shadow: 0 0 10px #00f;
-      cursor: pointer;
-      transition: transform 0.2s;
-      margin: 5px 0;
-    }
-    button:hover {
-      transform: scale(1.05);
-    }
-    .welcome, #main-content, #payment-method {
-      display: none;
-      flex-direction: column;
-      gap: 15px;
-      align-items: center;
-      text-align: center;
-    }
-    .list-jualan {
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px #00f;
+      border-radius: 20px;
+      box-shadow: 0 0 15px red;
+      width: 90%;
       max-width: 400px;
-      text-align: left;
     }
-    .notif-loop {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: rgba(0, 0, 0, 0.8);
-      box-shadow: 0 0 12px #00f;
-      color: #fff;
-      padding: 12px 20px;
-      border-radius: 18px;
-      font-size: 14px;
-      min-width: 320px;
-      text-align: center;
-      z-index: 9999;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.6s ease-in-out;
+    .button-container {
+      background: rgba(20,20,20,0.8);
+      margin: 10px auto;
+      padding: 10px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px red;
+      width: 90%;
+      max-width: 400px;
     }
-    .notif-show {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
-    .blinking {
-      animation: blinkSlow 2s infinite;
-    }
-    @keyframes blinkSlow {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-    .footer-text {
+    button, .link-button {
+      background: transparent;
       color: white;
-      opacity: 0.76;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      width: 100%;
+      font-size: 16px;
+      display: block;
+      text-decoration: none;
+      text-align: center;
+    }
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      width: 80%;
+      margin: 10px auto;
+      display: block;
+      text-align: center;
+    }
+    #audio-logout-controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
       margin-top: 20px;
     }
-    #volumeControl {
+    #audio-logout-controls button {
+      background: white;
+      color: black;
+    }
+    #notif-floating {
       position: fixed;
-      right: 10px;
-      bottom: 10px;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      padding: 10px 20px;
+      border-radius: 15px;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 0 10px red;
+      animation: floatNotif 6s infinite;
       z-index: 9999;
     }
-    #playPauseBtn {
-      position: fixed;
-      right: 10px;
-      bottom: 50px;
-      z-index: 9999;
-      background-color: black;
-      border-radius: 8px;
-      padding: 6px 12px;
+    @keyframes floatNotif {
+      0% { top: -100px; opacity: 0; }
+      25% { top: 50px; opacity: 1; }
+      75% { top: 50px; opacity: 1; }
+      100% { top: -100px; opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <div id="notifLoop" class="notif-loop"></div>
-  <div id="intro-sequence"></div>
-  <div class="welcome" id="welcome-input">
-    <h2>Masukkan Nama Kamu:</h2>
-    <input type="text" id="namaInput" placeholder="Nama Kamu">
-    <button onclick="tampilkanKonten()">Enter</button>
-  </div>
-  <div id="main-content">
-    <h3 id="greeting" class="blinking"></h3>
-    <div class="list-jualan" id="listJualan">
-      <strong>📦 List Jualan:</strong><br><br>
-      ▪️ Panel Pterodactyl 1GB - 10GB, UNLI 🚀 (OPEN RESELLER)<br>
-      ▪️ Bahan JB Lengkap<br>
-      ▪️ Bahan Logo Keren<br>
-      ▪️ Script Bug Assorted<br>
-      ▪️ Jasa Create SC Bug via Tele & WA<br>
-      ▪️ Jasa Admin / MC - Culik / Send Link<br>
-      ▪️ JASTEB<br>
-      ▪️ Unchek<br>
-      ▪️ NOKOS All Negara + All APK<br>
-      ▪️ Jasa Pembuatan Website<br>
-      ▪️ Open Japost<br>
-      ▪️ Jasshare<br>
-      ▪️ Suntik all sosmed<br>
-      ▪️ Suntik foll ch WA
+  <div id="notif-floating">DILARANG MENJUAL/SHARE GRATIS<br>LU BUKAN SIAPA-SIAPA</div>
+  <audio id="bg-music" src="https://files.catbox.moe/8ydmap.mp3" autoplay loop></audio>
+  <div class="card" id="login-card">
+    <h2>Login</h2>
+    <input id="email" placeholder="Masukkan Email" />
+    <input id="password" placeholder="Masukkan Password" type="password" />
+    <div class="button-container">
+      <button onclick="login()">Masuk</button>
     </div>
-    <button onclick="window.location.href='https://wa.me/62895337727870?text=Halo+Developer'">Developer</button>
-    <button onclick="window.location.href='https://wa.me/62895337727870?text=Permisi+Min+saya+sudah+tf+mau+order'">SS Bukti TF</button>
-    <button onclick="bukaPayment()">Payment</button>
-    <button onclick="window.location.href='https://whatsapp.com/channel/0029Vb5xDl835fLvtLE9Yu3h'">Saluran Developer</button>
-    <div class="footer-text">© RYZENX - CRR TEAM</div>
+    <p id="notif-login"></p>
   </div>
-  <div id="payment-method">
-    <h3>Pilih Metode Pembayaran</h3>
-    <button onclick="salinText('0895337727870')">Dana</button>
-    <button onclick="salinText('0895337727870')">Gopay</button>
-    <button onclick="showNotif('Minta QRIS ke Admin ya 🙏')">QRIS</button>
-    <button onclick="kembali()">Kembali</button>
+  <div class="card" id="menu-card" style="display:none;">
+    <h3>Menu</h3>
+    <div class="button-container">
+      <button onclick="openCrash('android')">👾 Crash Invisible Android</button>
+    </div>
+    <div class="button-container">
+      <button onclick="openCrash('iphone')">🍎 Crash Invisible iPhone</button>
+    </div>
+    <div class="button-container">
+      <button onclick="openCrash('delay')">🪬 Beta Invisible Delay</button>
+    </div>
+    <div class="button-container">
+      <button onclick="openTQTO()">🚀 Spasibo To</button>
+    </div>
+    <div class="button-container">
+      <a class="link-button" href="https://wa.me/62895337727870?text=Permisi+Developer" target="_blank">👨‍💻 Hubungi Developer</a>
+    </div>
+    <div id="audio-logout-controls">
+      <button onclick="toggleAudio()" id="audio-btn">🔊 Musik Off</button>
+      <button onclick="logout()">Logout</button>
+    </div>
   </div>
-  <audio id="bgMusic" autoplay loop>
-    <source src="https://files.catbox.moe/fx83fr.mp3" type="audio/mpeg">
-  </audio>
-  <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.5">
-  <button id="playPauseBtn" onclick="toggleMusic()">Pause</button>
+  <div class="card" id="crash-card" style="display:none;">
+    <h3 id="crash-title"></h3>
+    <input id="target" placeholder="Masukkan Nomor Target" />
+    <div class="button-container">
+      <button onclick="startBug()">Bug</button>
+    </div>
+    <div class="button-container">
+      <button onclick="backToMenu()">Back</button>
+    </div>
+    <p id="notif-bug"></p>
+  </div>
+  <div class="card" id="tqto-panel" style="display:none;">
+    <h3>🚀 Spasibo To</h3>
+    <p>👨‍💻 RYZENX — Developer</p>
+    <p>🤝 CHRIZYX — Best Friend</p>
+    <p>🤝 RIZZXA — Best Friend</p>
+    <p>🤝 DEDE — Best Friend</p>
+    <p>👥 TAMA — My Friend</p>
+    <p>🕋 ALLAH — My God</p>
+    <p>👨‍👩‍👧 Ortu — Ultimate Support</p>
+    <p>🛠️ MR. LexzTheRuler — Support</p>
+    <p>🛠️ Arexans — Support</p>
+    <div class="button-container">
+      <button onclick="backToMenu()">Back</button>
+    </div>
+  </div>
+  <p style="margin-top:30px; color:white; text-shadow: 1px 1px black;">© RYZENX CRR TEAM</p>
   <script>
-    const introTexts = ["halo mas/kak selamat datang","Masukkan nama saja, tenang","Ini bukan phishing kok","Biar kenal aja hahah"];
-    const notifLoopTexts = ["Website ini dibuat RYZENX CRR TEAM","Mohon jangan DDoS atau copyright","Jika iri itu disaingi, bukan dirusak secara paksa","Youtube : Ryzenx-Z4RXZ"];
-    let introIndex = 0;
-    let notifIndex = 0;
-    let notifTimeout;
-    function tampilIntro() {
-      if (introIndex >= introTexts.length) {
-        document.getElementById("welcome-input").style.display = "flex";
-        return;
-      }
-      const el = document.createElement("div");
-      el.className = "intro-text";
-      el.textContent = introTexts[introIndex];
-      document.getElementById("intro-sequence").appendChild(el);
-      introIndex++;
-      setTimeout(() => {
-        el.remove();
-        tampilIntro();
-      }, 3100);
-    }
-    function tampilkanKonten() {
-      const nama = document.getElementById('namaInput').value.trim();
-      if (nama !== '') {
-        document.getElementById('welcome-input').style.display = 'none';
-        document.getElementById('main-content').style.display = 'flex';
-        document.getElementById('greeting').innerText = `Selamat datang, ${nama}!`;
-        document.body.style.backgroundImage = "url('https://files.catbox.moe/l3fndy.png')";
-      } else {
-        alert("Masukkan nama terlebih dahulu.");
-      }
-    }
-    function bukaPayment() {
-      document.getElementById('main-content').style.display = 'none';
-      document.getElementById('payment-method').style.display = 'flex';
-    }
-    function kembali() {
-      document.getElementById('payment-method').style.display = 'none';
-      document.getElementById('main-content').style.display = 'flex';
-    }
-    function salinText(text) {
-      navigator.clipboard.writeText(text);
-      alert("Nomor berhasil disalin!");
-    }
-    function showNotif(customText) {
-      clearTimeout(notifTimeout);
-      const el = document.getElementById("notifLoop");
-      el.textContent = customText;
-      el.classList.add("notif-show");
-      notifTimeout = setTimeout(() => {
-        el.classList.remove("notif-show");
-        loopNotif();
-      }, 4000);
-    }
-    function loopNotif() {
-      const el = document.getElementById("notifLoop");
-      el.textContent = notifLoopTexts[notifIndex];
-      el.classList.add("notif-show");
-      notifIndex = (notifIndex + 1) % notifLoopTexts.length;
-      notifTimeout = setTimeout(() => {
-        el.classList.remove("notif-show");
-        setTimeout(loopNotif, 5000);
-      }, 3000);
-    }
-    const bgMusic = document.getElementById('bgMusic');
-    const volumeControl = document.getElementById('volumeControl');
-    const playPauseBtn = document.getElementById('playPauseBtn');
-    volumeControl.addEventListener('input', () => {
-      bgMusic.volume = volumeControl.value;
-    });
-    function toggleMusic() {
-      if (bgMusic.paused) {
-        bgMusic.play();
-        playPauseBtn.textContent = "Pause";
-      } else {
-        bgMusic.pause();
-        playPauseBtn.textContent = "Play";
-      }
-    }
-    window.onload = () => {
-      tampilIntro();
-      loopNotif();
-    };
+    let currentCrash = '';
+    const audio = document.getElementById('bg-music');
+    let audioOn = true;function toggleAudio() {
+  if(audioOn) {
+    audio.pause();
+    document.getElementById('audio-btn').innerText = '🔈 Musik On';
+  } else {
+    audio.play();
+    document.getElementById('audio-btn').innerText = '🔊 Musik Off';
+  }
+  audioOn = !audioOn;
+}
+
+function login() {
+  const email = document.getElementById('email').value.toLowerCase();
+  const pw = document.getElementById('password').value.toLowerCase();
+  const notif = document.getElementById('notif-login');
+  if (
+    (email === 'ryzenxcrr' && pw === 'ryzenx host') ||
+    (email === 'jea' && pw === 'jangan dijual atau dikasih free')
+  ) {
+    notif.innerText = 'Berhasil login...';
+    setTimeout(() => {
+      document.getElementById('login-card').style.display = 'none';
+      document.getElementById('menu-card').style.display = 'block';
+    }, 3000);
+  } else if (email !== 'ryzenxcrr' && email !== 'jea') {
+    notif.innerText = 'email aja salah';
+  } else if (
+    (email === 'ryzenxcrr' && pw !== 'ryzenx host') ||
+    (email === 'jea' && pw !== 'jangan dijual atau dikasih free')
+  ) {
+    notif.innerText = 'pw aja salah';
+  } else {
+    notif.innerText = 'apalah\nnyolong ya\npw aja salah';
+  }
+}
+
+function logout() {
+  document.getElementById('menu-card').style.display = 'none';
+  document.getElementById('login-card').style.display = 'block';
+}
+
+function openCrash(type) {
+  currentCrash = type;
+  document.getElementById('menu-card').style.display = 'none';
+  document.getElementById('crash-card').style.display = 'block';
+  let title = 'Crash Eksekusi';
+  if(type==='android') title = '👾 Eksekusi Android';
+  else if(type==='iphone') title = '🍎 Eksekusi iPhone';
+  else title = '🪬 Eksekusi Delay';
+  document.getElementById('crash-title').innerText = title;
+  document.getElementById('notif-bug').innerText = '';
+}
+
+function startBug() {
+  const input = document.getElementById('target').value;
+  const notif = document.getElementById('notif-bug');
+  if (!input) {
+    notif.innerText = 'Gagal: Tidak ada nomor target';
+    setTimeout(() => notif.innerText = '', 3000);
+  } else if (input.length < 8 || /\D/.test(input)) {
+    notif.innerText = 'Gagal: Nomor tidak valid';
+    setTimeout(() => notif.innerText = '', 3000);
+  } else {
+    notif.innerText = 'Menjalankan bug...';
+    setTimeout(() => {
+      notif.innerText = 'Berhasil dibug';
+    }, 5000);
+  }
+}
+
+function backToMenu() {
+  document.getElementById('crash-card').style.display = 'none';
+  document.getElementById('tqto-panel').style.display = 'none';
+  document.getElementById('menu-card').style.display = 'block';
+}
+
+function openTQTO() {
+  document.getElementById('menu-card').style.display = 'none';
+  document.getElementById('tqto-panel').style.display = 'block';
+}
+
   </script>
 </body>
 </html>
