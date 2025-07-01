@@ -1,0 +1,201 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ASSORTED CRASHER V3</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: url('https://img1.pixhost.to/images/6890/617231330_kyami.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      text-align: center;
+    }
+    .card {
+      background: rgba(0,0,0,0.8);
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px red;
+      width: 90%;
+      max-width: 400px;
+    }
+    .button-container {
+      background: rgba(20,20,20,0.8);
+      margin: 10px auto;
+      padding: 10px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px red;
+      width: 90%;
+      max-width: 400px;
+    }
+    button, .link-button {
+      background: transparent;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      width: 100%;
+      font-size: 16px;
+      display: block;
+      text-decoration: none;
+    }
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      width: 80%;
+      margin: 10px auto;
+      display: block;
+      text-align: center;
+    }
+    #audio-logout-controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    #audio-logout-controls button {
+      background: white;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <h1>ASSORTED CRASHER V3</h1>
+  <audio id="bg-music" src="https://files.catbox.moe/8ydmap.mp3" autoplay loop></audio>
+  <div class="card" id="login-card">
+    <h2>Login</h2>
+    <input id="email" placeholder="Masukkan Email" />
+    <input id="password" placeholder="Masukkan Password" type="password" />
+    <div class="button-container">
+      <button onclick="login()">Masuk</button>
+    </div>
+    <p id="notif-login"></p>
+  </div>  <div class="card" id="menu-card" style="display:none;">
+    <h3>Menu</h3>
+    <div class="button-container">
+      <button onclick="openCrash('android')">👾 Crash Invisible Android</button>
+    </div>
+    <div class="button-container">
+      <button onclick="openCrash('iphone')">🍎 Crash Invisible iPhone</button>
+    </div>
+    <div class="button-container">
+      <button onclick="openCrash('delay')">🪬 Beta Invisible Delay</button>
+    </div>
+    <div class="button-container">
+      <button onclick="openTQTO()">🚀 Spasibo To</button>
+    </div>
+    <div class="button-container">
+      <a class="link-button" href="https://wa.me/62895337727870?text=Permisi+Developer" target="_blank">👨‍💻 Hubungi Developer</a>
+    </div>
+    <div id="audio-logout-controls">
+      <button onclick="toggleAudio()" id="audio-btn">🔊 Musik Off</button>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>  <div class="card" id="crash-card" style="display:none;">
+    <h3 id="crash-title"></h3>
+    <input id="target" placeholder="Masukkan Nomor Target" />
+    <div class="button-container">
+      <button onclick="startBug()">Bug</button>
+    </div>
+    <div class="button-container">
+      <button onclick="backToMenu()">Back</button>
+    </div>
+    <p id="notif-bug"></p>
+  </div>  <div class="card" id="tqto-panel" style="display:none;">
+    <h3>🚀 Spasibo To</h3>
+    <p>👨‍💻 RYZENX — Developer</p>
+    <p>🤝 CHRIZYX — Best Friend</p>
+    <p>🤝 RIZZXA — Best Friend</p>
+    <p>🤝 DEDE — Best Friend</p>
+    <p>👥 TAMA — My Friend</p>
+    <p>🕋 ALLAH — My God</p>
+    <p>👨‍👩‍👧 Ortu — Ultimate Support</p>
+    <p>🛠️ MR. LexzTheRuler — Support</p>
+    <p>🛠️ Arexans — Support</p>
+    <div class="button-container">
+      <button onclick="backToMenu()">Back</button>
+    </div>
+  </div>  <p style="margin-top:30px;">© RYZENX CRR TEAM</p>  <script>
+    let currentCrash = '';
+    const audio = document.getElementById('bg-music');
+    let audioOn = true;
+
+    function toggleAudio() {
+      if(audioOn) {
+        audio.pause();
+        document.getElementById('audio-btn').innerText = '🔈 Musik On';
+      } else {
+        audio.play();
+        document.getElementById('audio-btn').innerText = '🔊 Musik Off';
+      }
+      audioOn = !audioOn;
+    }
+
+    function login() {
+      const email = document.getElementById('email').value;
+      const pw = document.getElementById('password').value;
+      const notif = document.getElementById('notif-login');
+      if (email !== 'ryzenxcrr' && pw !== 'ryzenx host') {
+        notif.innerText = 'apalah\nnyolong ya\npw aja salah';
+      } else if (email !== 'ryzenxcrr') {
+        notif.innerText = 'email aja salah';
+      } else if (pw !== 'ryzenx host') {
+        notif.innerText = 'pw aja salah';
+      } else {
+        notif.innerText = 'Berhasil login...';
+        setTimeout(() => {
+          document.getElementById('login-card').style.display = 'none';
+          document.getElementById('menu-card').style.display = 'block';
+        }, 3000);
+      }
+    }
+
+    function logout() {
+      document.getElementById('menu-card').style.display = 'none';
+      document.getElementById('login-card').style.display = 'block';
+    }
+
+    function openCrash(type) {
+      currentCrash = type;
+      document.getElementById('menu-card').style.display = 'none';
+      document.getElementById('crash-card').style.display = 'block';
+      let title = 'Crash Eksekusi';
+      if(type==='android') title = '👾 Eksekusi Android';
+      else if(type==='iphone') title = '🍎 Eksekusi iPhone';
+      else title = '🪬 Eksekusi Delay';
+      document.getElementById('crash-title').innerText = title;
+      document.getElementById('notif-bug').innerText = '';
+    }
+
+    function startBug() {
+      const input = document.getElementById('target').value;
+      const notif = document.getElementById('notif-bug');
+      if (!input) {
+        notif.innerText = 'Gagal: Tidak ada nomor target';
+        setTimeout(() => notif.innerText = '', 3000);
+      } else if (input.length < 8 || /\D/.test(input)) {
+        notif.innerText = 'Gagal: Nomor tidak valid';
+        setTimeout(() => notif.innerText = '', 3000);
+      } else {
+        notif.innerText = 'Menjalankan bug...';
+        setTimeout(() => {
+          notif.innerText = 'Berhasil dibug';
+        }, 5000);
+      }
+    }
+
+    function backToMenu() {
+      document.getElementById('crash-card').style.display = 'none';
+      document.getElementById('tqto-panel').style.display = 'none';
+      document.getElementById('menu-card').style.display = 'block';
+    }
+
+    function openTQTO() {
+      document.getElementById('menu-card').style.display = 'none';
+      document.getElementById('tqto-panel').style.display = 'block';
+    }
+  </script></body>
+</html>
