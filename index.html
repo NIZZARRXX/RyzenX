@@ -1,0 +1,264 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RYZENX CRR</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 700;
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background-image: url('https://files.catbox.moe/hppe4k.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .intro-text {
+      animation: fadeSlide 3s ease-in-out;
+      margin-bottom: 10px;
+      text-align: center;
+      font-size: 18px;
+      background-color: black;
+      box-shadow: 0 0 10px #00f;
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+    @keyframes fadeSlide {
+      0% { opacity: 0; transform: translateY(-20px); }
+      10% { opacity: 1; transform: translateY(0); }
+      90% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-20px); }
+    }
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      width: 250px;
+      text-align: center;
+      background-color: black;
+      color: white;
+      box-shadow: 0 0 10px #00f;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #00f;
+      cursor: pointer;
+      transition: transform 0.2s;
+      margin: 5px 0;
+    }
+    button:hover {
+      transform: scale(1.05);
+    }
+    .welcome, #main-content, #payment-method {
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+      text-align: center;
+    }
+    .list-jualan {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #00f;
+      max-width: 400px;
+      text-align: left;
+    }
+    .notif-loop {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      box-shadow: 0 0 12px #00f;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 18px;
+      font-size: 14px;
+      min-width: 320px;
+      text-align: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.6s ease-in-out;
+    }
+    .notif-show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+    .blinking {
+      animation: blinkSlow 2s infinite;
+    }
+    @keyframes blinkSlow {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .footer-text {
+      color: white;
+      opacity: 0.76;
+      margin-top: 20px;
+    }
+    #volumeControl {
+      position: fixed;
+      right: 10px;
+      bottom: 10px;
+      z-index: 9999;
+    }
+    #playPauseBtn {
+      position: fixed;
+      right: 10px;
+      bottom: 50px;
+      z-index: 9999;
+      background-color: black;
+      border-radius: 8px;
+      padding: 6px 12px;
+    }
+  </style>
+</head>
+<body>
+  <div id="notifLoop" class="notif-loop"></div>
+  <div id="intro-sequence"></div>
+  <div class="welcome" id="welcome-input">
+    <h2>Masukkan Nama Kamu:</h2>
+    <input type="text" id="namaInput" placeholder="Nama Kamu">
+    <button onclick="tampilkanKonten()">Enter</button>
+  </div>
+  <div id="main-content">
+    <h3 id="greeting" class="blinking"></h3>
+    <div class="list-jualan" id="listJualan">
+      <strong>📦 List Jualan:</strong><br><br>
+      ▪️ Panel Pterodactyl 1GB - 10GB, UNLI 🚀 (OPEN RESELLER)<br>
+      ▪️ Bahan JB Lengkap<br>
+      ▪️ Bahan Logo Keren<br>
+      ▪️ Script Bug Assorted<br>
+      ▪️ Jasa Create SC Bug via Tele & WA<br>
+      ▪️ Jasa Admin / MC - Culik / Send Link<br>
+      ▪️ JASTEB<br>
+      ▪️ Unchek<br>
+      ▪️ NOKOS All Negara + All APK<br>
+      ▪️ Jasa Pembuatan Website<br>
+      ▪️ Open Japost<br>
+      ▪️ Jasshare<br>
+      ▪️ Suntik all sosmed<br>
+      ▪️ Suntik foll ch WA
+    </div>
+    <button onclick="window.location.href='https://wa.me/62895337727870?text=Halo+Developer'">Developer</button>
+    <button onclick="window.location.href='https://wa.me/62895337727870?text=Permisi+Min+saya+sudah+tf+mau+order'">SS Bukti TF</button>
+    <button onclick="bukaPayment()">Payment</button>
+    <button onclick="window.location.href='https://whatsapp.com/channel/0029Vb5xDl835fLvtLE9Yu3h'">Saluran Developer</button>
+    <div class="footer-text">© RYZENX - CRR TEAM</div>
+  </div>
+  <div id="payment-method">
+    <h3>Pilih Metode Pembayaran</h3>
+    <button onclick="salinText('0895337727870')">Dana</button>
+    <button onclick="salinText('0895337727870')">Gopay</button>
+    <button onclick="showNotif('Minta QRIS ke Admin ya 🙏')">QRIS</button>
+    <button onclick="kembali()">Kembali</button>
+  </div>
+  <audio id="bgMusic" autoplay loop>
+    <source src="https://files.catbox.moe/fx83fr.mp3" type="audio/mpeg">
+  </audio>
+  <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.5">
+  <button id="playPauseBtn" onclick="toggleMusic()">Pause</button>
+  <script>
+    const introTexts = ["halo mas/kak selamat datang","Masukkan nama saja, tenang","Ini bukan phishing kok","Biar kenal aja hahah"];
+    const notifLoopTexts = ["Website ini dibuat RYZENX CRR TEAM","Mohon jangan DDoS atau copyright","Jika iri itu disaingi, bukan dirusak secara paksa","Youtube : Ryzenx-Z4RXZ"];
+    let introIndex = 0;
+    let notifIndex = 0;
+    let notifTimeout;
+    function tampilIntro() {
+      if (introIndex >= introTexts.length) {
+        document.getElementById("welcome-input").style.display = "flex";
+        return;
+      }
+      const el = document.createElement("div");
+      el.className = "intro-text";
+      el.textContent = introTexts[introIndex];
+      document.getElementById("intro-sequence").appendChild(el);
+      introIndex++;
+      setTimeout(() => {
+        el.remove();
+        tampilIntro();
+      }, 3100);
+    }
+    function tampilkanKonten() {
+      const nama = document.getElementById('namaInput').value.trim();
+      if (nama !== '') {
+        document.getElementById('welcome-input').style.display = 'none';
+        document.getElementById('main-content').style.display = 'flex';
+        document.getElementById('greeting').innerText = `Selamat datang, ${nama}!`;
+        document.body.style.backgroundImage = "url('https://files.catbox.moe/l3fndy.png')";
+      } else {
+        alert("Masukkan nama terlebih dahulu.");
+      }
+    }
+    function bukaPayment() {
+      document.getElementById('main-content').style.display = 'none';
+      document.getElementById('payment-method').style.display = 'flex';
+    }
+    function kembali() {
+      document.getElementById('payment-method').style.display = 'none';
+      document.getElementById('main-content').style.display = 'flex';
+    }
+    function salinText(text) {
+      navigator.clipboard.writeText(text);
+      alert("Nomor berhasil disalin!");
+    }
+    function showNotif(customText) {
+      clearTimeout(notifTimeout);
+      const el = document.getElementById("notifLoop");
+      el.textContent = customText;
+      el.classList.add("notif-show");
+      notifTimeout = setTimeout(() => {
+        el.classList.remove("notif-show");
+        loopNotif();
+      }, 4000);
+    }
+    function loopNotif() {
+      const el = document.getElementById("notifLoop");
+      el.textContent = notifLoopTexts[notifIndex];
+      el.classList.add("notif-show");
+      notifIndex = (notifIndex + 1) % notifLoopTexts.length;
+      notifTimeout = setTimeout(() => {
+        el.classList.remove("notif-show");
+        setTimeout(loopNotif, 5000);
+      }, 3000);
+    }
+    const bgMusic = document.getElementById('bgMusic');
+    const volumeControl = document.getElementById('volumeControl');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    volumeControl.addEventListener('input', () => {
+      bgMusic.volume = volumeControl.value;
+    });
+    function toggleMusic() {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        playPauseBtn.textContent = "Pause";
+      } else {
+        bgMusic.pause();
+        playPauseBtn.textContent = "Play";
+      }
+    }
+    window.onload = () => {
+      tampilIntro();
+      loopNotif();
+    };
+  </script>
+</body>
+</html>
