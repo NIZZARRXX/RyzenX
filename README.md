@@ -1,1 +1,1 @@
-# RyzenX
+# GAUSAH COPYRYGHT BANGSAT!!!
